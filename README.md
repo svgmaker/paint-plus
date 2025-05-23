@@ -18,6 +18,10 @@ Broken things (devs wanted):
 - Image > Attributes shows the "Use transparent background color" option. It only is active when you are editing a GIF and it doesn't work...
 - I can't save any image as a GIF on Windows 10 but we only have to start caring about that when we get transparent bg color working.
 
+Todo:
+
+- Add a DLL icon stamp tool thing. I know that you can make one, but the same thing with the triangle tool, I have only figured out how to replace a tool instead of making a new one.
+
 The end goal for this project is to turn this into a more feature-rich version of Paint.
 
 ## Screenshots
