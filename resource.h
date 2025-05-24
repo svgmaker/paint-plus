@@ -74,10 +74,6 @@
 #define PS_OPENTYPE_BMP                 138
 #define TYPE1_BMP                       139
 #define IDC_CHARSET                     140
-#define IDD_ABOUT_SVGMAKER              142
-#define IDB_BITMAP1                     143
-#define TRI                             144
-#define IDR_WMF1                        144
 #define STRINGARRAYSIZE                 240
 #define IDC_WIDTH                       264
 #define IDC_HEIGHT                      266
@@ -152,6 +148,7 @@
 #define IDC_FILEDATE_STATIC             1071
 #define IDC_FILESIZE_STATIC             1072
 #define IDC_RESOLUTION_STATIC           1073
+#define IDC_CUSTOM_ZOOM                 1076
 #define IDC_MONOCHROME                  1079
 #define IDC_COLORS                      1080
 #define IDC_CURRENT_ZOOM                1081
@@ -359,7 +356,6 @@
 #define IDS_HOTKEY_OPEN                 59421
 #define IDS_FORMATERR_FILE              59500
 #define IDS_FORMATERR_NOFILE            59501
-#define ID_VIEW_ZOOM_BIGZOOM            59502
 #define ID_STATIC                       -1
 
 // Next default values for new objects
@@ -367,9 +363,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        145
-#define _APS_NEXT_COMMAND_VALUE         59504
-#define _APS_NEXT_CONTROL_VALUE         1076
+#define _APS_NEXT_RESOURCE_VALUE        142
+#define _APS_NEXT_COMMAND_VALUE         59502
+#define _APS_NEXT_CONTROL_VALUE         1077
 #define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif

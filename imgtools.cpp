@@ -43,9 +43,6 @@ IMPLEMENT_DYNAMIC(CSelectTool, CImgTool)
 IMPLEMENT_DYNAMIC(CZoomTool, CImgTool)
 
 #include "memtrace.h"
-#include <windows.h>
-#include <winuser.h>  // Usually included by windows.h
-#include <wingdi.h>
 
 extern CRect  rcDragBrush;
 
@@ -995,7 +992,7 @@ void CRubberTool::Render( CDC* pDC, CRect& rect, BOOL bLeft, BOOL bCommit, BOOL 
     CPoint pt2;
     HDC    hDC = pDC->m_hDC;
 
-    enum SHAPE { rectangle, roundRect, ellipse, triangle } shape;
+    enum SHAPE { rectangle, roundRect, ellipse } shape;
 
     switch (m_nCmdID)
         {
@@ -1025,9 +1022,6 @@ void CRubberTool::Render( CDC* pDC, CRect& rect, BOOL bLeft, BOOL bCommit, BOOL 
         case IDMB_FELLIPSETOOL:
             shape = ellipse;
             break;
-        case IDMB_TRIANGLETOOL:
-            shape = triangle;
-            break;
         }
 
     FixRect(&rect);
@@ -1050,49 +1044,9 @@ void CRubberTool::Render( CDC* pDC, CRect& rect, BOOL bLeft, BOOL bCommit, BOOL 
 
     switch (shape)
         {
-			case rectangle:
-			Rectangle(hDC, sx, sy, ex, ey);
-    break;
-
-case triangle:
-{
-    // Define three points for the triangle
-    POINT pts[3];
-    pts[0].x = sx;  pts[0].y = ey; // Bottom-left corner
-    pts[1].x = (sx + ex) / 2; pts[1].y = sy; // Top-center
-    pts[2].x = ex;  pts[2].y = ey; // Bottom-right corner
-
-    // If you want to fill the triangle:
-    if (m_bFilled) {
-        HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0)); // Choose color as needed
-        HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, hBrush);
-        HPEN hPen = m_bBorder ? CreatePen(PS_SOLID, 1, RGB(0,0,0)) : (HPEN)GetStockObject(NULL_PEN);
-        HPEN oldPen = (HPEN)SelectObject(hDC, hPen);
-
-        Polygon(hDC, pts, 3);
-
-        SelectObject(hDC, oldBrush);
-        DeleteObject(hBrush);
-
-        SelectObject(hDC, oldPen);
-        if (m_bBorder)
-            DeleteObject(hPen);
-    }
-    else // just draw the outline
-    {
-        HPEN hPen = CreatePen(PS_SOLID, 1, RGB(0,0,0)); // Choose border color
-        HPEN oldPen = (HPEN)SelectObject(hDC, hPen);
-
-        HBRUSH oldBrush = (HBRUSH)SelectObject(hDC, GetStockObject(NULL_BRUSH));
-        Polygon(hDC, pts, 3);
-
-        SelectObject(hDC, oldBrush);
-        SelectObject(hDC, oldPen);
-        DeleteObject(hPen);
-    }
-}
-break;
-
+        case rectangle:
+            Rectangle(hDC, sx, sy, ex, ey);
+            break;
 
         case roundRect:
             RoundRect(hDC, sx, sy, ex, ey, 16, 16);
@@ -1104,7 +1058,6 @@ break;
 //              MyRoundRect(hDC, sx, sy, ex, ey, 16, 16, !m_bFilled);
 //          }
             break;
-
 
         case ellipse:
             Ellipse(hDC, sx, sy, ex, ey);

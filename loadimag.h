@@ -8,14 +8,6 @@
 #ifndef _LOADIMAG_H_ 
 #define _LOADIMAG_H_ 
 
-#include <windows.h>
-#include <ole2.h>
-#include <objidl.h>
-#include <gdiplus.h>
-using namespace Gdiplus;
-#pragma comment(lib, "gdiplus.lib")
-
-
 class CGdiplusInit : public Gdiplus::GdiplusStartupOutput
 {
 public:

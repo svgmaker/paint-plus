@@ -448,7 +448,7 @@ void CPBFrame::OnUpdateFrameTitle( BOOL bAddToTitle )
             sText.MakeLower();
             }
         }
-    sText += _T("Paint (modded by github.com/svgmaker)");
+    sText += m_strTitle;
 
     // set title if changed, but don't remove completely
     if (sText != sOld)

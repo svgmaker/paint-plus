@@ -67,7 +67,6 @@ class CPBFrame : public CFrameWnd
         afx_msg void OnHelp();
         afx_msg void OnSysColorChange();
         afx_msg void OnClose();
-		afx_msg void OnHelpAboutSVGMaker();
         //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
     };

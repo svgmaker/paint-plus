@@ -135,4 +135,3 @@ DEFINE_GUID( CLSID_StiEventHandler, 0x8144b6f5, 0x20a8, 0x444a, 0xb8, 0xee, 0x19
 #endif
 
 #endif // !_WIADEVDP_H_INCLUDED
-

@@ -3,9 +3,63 @@
 <pre>
 <h1>Build Log</h1>
 <h3>
---------------------Configuration: mspaint - Win32 ANSI Release--------------------
+--------------------Configuration: mspaint - Win32 ANSI Debug--------------------
 </h3>
 <h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP2B.tmp" with contents
+[
+image.lib htmlhelp.lib imm32.lib version.lib wiaguid.lib gdiplus.lib uxtheme.lib delayimp.lib /nologo /subsystem:windows /incremental:yes /pdb:"DebugA/mspaint.pdb" /debug /machine:I386 /out:"DebugA/mspaint.exe" /pdbtype:sept /delayload:gdiplus.dll /delayload:uxtheme.dll 
+".\DebugA\bar.obj"
+".\DebugA\bmobject.obj"
+".\DebugA\bmpstrm.obj"
+".\DebugA\cmpmsg.obj"
+".\DebugA\colorsrc.obj"
+".\DebugA\docking.obj"
+".\DebugA\global.obj"
+".\DebugA\imageatt.obj"
+".\DebugA\imaging.obj"
+".\DebugA\imgbrush.obj"
+".\DebugA\imgcolor.obj"
+".\DebugA\imgcpyps.obj"
+".\DebugA\imgdlgs.obj"
+".\DebugA\imgfile.obj"
+".\DebugA\imgsuprt.obj"
+".\DebugA\imgtools.obj"
+".\DebugA\imgwell.obj"
+".\DebugA\imgwnd.obj"
+".\DebugA\ipframe.obj"
+".\DebugA\loadimag.obj"
+".\DebugA\minifwnd.obj"
+".\DebugA\ofn.obj"
+".\DebugA\pbrusdoc.obj"
+".\DebugA\pbrusfrm.obj"
+".\DebugA\pbrush.obj"
+".\DebugA\pbrusvw.obj"
+".\DebugA\pgsetup.obj"
+".\DebugA\pictures.obj"
+".\DebugA\printres.obj"
+".\DebugA\rotate.obj"
+".\DebugA\saveimag.obj"
+".\DebugA\settings.obj"
+".\DebugA\skew.obj"
+".\DebugA\sprite.obj"
+".\DebugA\srvritem.obj"
+".\DebugA\stdafx.obj"
+".\DebugA\t_curve.obj"
+".\DebugA\t_fhsel.obj"
+".\DebugA\t_poly.obj"
+".\DebugA\t_text.obj"
+".\DebugA\tedit.obj"
+".\DebugA\tfont.obj"
+".\DebugA\thumnail.obj"
+".\DebugA\toolbox.obj"
+".\DebugA\tracker.obj"
+".\DebugA\undo.obj"
+".\DebugA\mspaint.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP2B.tmp"
+<h3>Output Window</h3>
+Linking...
 
 
 

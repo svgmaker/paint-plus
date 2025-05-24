@@ -6,6 +6,14 @@
 * Copyright (c) 1998, Microsoft Corp. All rights reserved.           
 *                                                                    
 **************************************************************************/
+#ifndef _LOADIMAG_H_
+#define _LOADIMAG_H_
+
+#include <windows.h>
+#include <objidl.h>
+#include <gdiplus.h>
+
+using namespace Gdiplus;
 
 // GDI+ specific functions:
 
@@ -36,4 +44,3 @@ WINGDIAPI INT WINAPI GpStartDocA(IN HDC, IN CONST DOCINFOA *);
 WINGDIAPI INT WINAPI GpEndDoc(IN HDC);
 WINGDIAPI INT WINAPI GpStartPage(IN HDC);
 WINGDIAPI INT WINAPI GpEndPage(IN HDC);
-

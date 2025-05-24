@@ -657,73 +657,54 @@ return lResult;
 /***************************************************************************/
 
 BOOL CZoomViewDlg::OnInitDialog()
-    {
+{
     CDialog::OnInitDialog();
 
-    TCHAR* pZoom = TEXT("100%");
-    UINT nButton = IDC_ZOOM_100;
+	int zoomValue = m_nCurrent * 100; // multiply zoom factor by 100 if needed
+	CString strZoom;
+	strZoom.Format(_T("%d"), zoomValue);
+	SetDlgItemText(IDC_CUSTOM_ZOOM, strZoom);
 
-    if (m_nCurrent < 8)
-        if (m_nCurrent < 6)
-            if (m_nCurrent < 4)
-                if (m_nCurrent < 2)
-                    ;
-                else
-                    {
-                    pZoom = TEXT("200%");
-                    nButton = IDC_ZOOM_200;
-                    }
-            else
-                {
-                pZoom = TEXT("400%");
-                nButton = IDC_ZOOM_400;
-                }
-        else
-            {
-            pZoom = TEXT("600%");
-            nButton = IDC_ZOOM_600;
-            }
-    else
-        {
-        pZoom = TEXT("800%");
-        nButton = IDC_ZOOM_800;
-        }
 
-    SetDlgItemText( IDC_CURRENT_ZOOM, pZoom );
-    CheckRadioButton( IDC_ZOOM_100, IDC_ZOOM_800, nButton );
+    // Also handle the radio button checking as before (optional)
 
-    return TRUE;  // return TRUE  unless you set the focus to a control
-    }
+    return TRUE;
+}
+
 
 /***************************************************************************/
 
 void CZoomViewDlg::OnOK()
 {
-    int checkedId = GetCheckedRadioButton( IDC_ZOOM_100, IDC_ZOOM_800 );
-    switch (checkedId)
+    // Try reading user input from custom zoom box
+    CString strZoom;
+    GetDlgItemText(IDC_CUSTOM_ZOOM, strZoom);
+
+    int nCustomZoom = _ttoi(strZoom);  // Convert string to int (0 if invalid)
+
+    if (nCustomZoom > 0)
     {
-        case IDC_ZOOM_100:
-            m_nCurrent = 10;  // 100%
-            break;
-        case IDC_ZOOM_200:
-            m_nCurrent = 20;  // 200%
-            break;
-        case IDC_ZOOM_400:
-            m_nCurrent = 40;  // 400%
-            break;
-        case IDC_ZOOM_600:
-            m_nCurrent = 60;  // 600%
-            break;
-        case IDC_ZOOM_800:
-            m_nCurrent = 80; // 1500%
-            break;
-        default:
-            m_nCurrent = 100; // fallback
-            break;
+        // Use custom zoom if valid
+        m_nCurrent = nCustomZoom / 100;
+    }
+    else
+    {
+
+        switch (m_nCurrent)
+        {
+            case 0: m_nCurrent = 10; break;   // 1000%
+            case 1: m_nCurrent = 2; break;    // 200%
+            case 2: m_nCurrent = 4; break;    // 400%
+            case 3: m_nCurrent = 6; break;    // 600%
+            case 4: m_nCurrent = 8; break;    // 800%
+            case 5: m_nCurrent = 20; break;   // 2000%
+            default: m_nCurrent = 1; break;
+        }
     }
 
     CDialog::OnOK();
 }
+
 
 /************************ CFlipRotateDlg dialog ****************************/
 

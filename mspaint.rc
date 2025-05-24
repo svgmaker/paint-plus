@@ -104,7 +104,6 @@ FONT_PRN_BMP            BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_PRN.BMP"
 TT_OPENTYPE_BMP         BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_TTOTF.BMP"
 PS_OPENTYPE_BMP         BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_PSOTF.BMP"
 TYPE1_BMP               BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_TYPE1.BMP"
-IDB_BITMAP1             BITMAP  DISCARDABLE     "res\\bitmaps\\bitmap1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -182,7 +181,7 @@ BEGIN
         BEGIN
             MENUITEM "&Normal Size\tCtrl+PgUp",     ID_VIEW_ZOOM_100
             MENUITEM "&Large Size\tCtrl+PgDn",      ID_VIEW_ZOOM_400
-            MENUITEM "1000x zoom...",               ID_VIEW_ZOOM
+            MENUITEM "C&ustom...",                  ID_VIEW_ZOOM
             MENUITEM SEPARATOR
             MENUITEM "Show &Grid\tCtrl+G",          ID_VIEW_GRID
             MENUITEM "Show T&humbnail",             ID_VIEW_THUMBNAIL
@@ -206,7 +205,7 @@ BEGIN
     BEGIN
         MENUITEM "&Help Topics",                ID_HELP
         MENUITEM SEPARATOR
-        MENUITEM "&About Modded Paint",         ID_APP_ABOUT
+        MENUITEM "&About Paint",                ID_APP_ABOUT
     END
 END
 
@@ -503,7 +502,7 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,142,24,50,14
 END
 
-IDD_IMAGE_ATTRIBUTES DIALOG DISCARDABLE  0, 0, 240, 178
+IDD_IMAGE_ATTRIBUTES DIALOG DISCARDABLE  0, 0, 234, 122
 STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
     WS_SYSMENU
 CAPTION "Attributes"
@@ -528,7 +527,7 @@ BEGIN
                     BS_AUTORADIOBUTTON | WS_TABSTOP,13,102,66,10
     CONTROL         "Co&lors",IDC_COLORS,"Button",BS_AUTORADIOBUTTON | 
                     WS_TABSTOP,105,102,36,10
-    GROUPBOX        "Transparency",-1,7,178,154,48,WS_GROUP
+    GROUPBOX        "Transparency",-1,7,122,154,48,WS_GROUP
     CONTROL         "Use &Transparent background color",IDC_USE_TRANS,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,13,134,126,10
     PUSHBUTTON      "Select &Color...",IDC_SELECT_COLOR,33,148,73,14
@@ -539,26 +538,20 @@ BEGIN
     PUSHBUTTON      "&Default",IDC_DEFAULT,176,41,50,14
 END
 
-IDD_VIEW_ZOOM DIALOG DISCARDABLE  16, 16, 63, 113
-STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION
-CAPTION "BIG zoom"
-FONT 8, "MS Sans Serif"
+IDD_VIEW_ZOOM DIALOG DISCARDABLE  16, 16, 200, 83
+STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Custom Zoom"
+FONT 8, "MS Shell Dlg"
 BEGIN
-    GROUPBOX        "Zoom to",IDC_STATIC,8,8,45,68,BS_FLAT | WS_GROUP
-    CONTROL         "&1000%",IDC_ZOOM_100,"Button",BS_AUTORADIOBUTTON | 
-                    BS_FLAT | WS_TABSTOP,12,18,33,10
-    CONTROL         "&1200%",IDC_ZOOM_200,"Button",BS_AUTORADIOBUTTON | 
-                    BS_FLAT | WS_TABSTOP,12,29,33,10
-    CONTROL         "&1400%",IDC_ZOOM_400,"Button",BS_AUTORADIOBUTTON | 
-                    BS_FLAT | WS_TABSTOP,12,39,33,10
-    CONTROL         "&1600%",IDC_ZOOM_600,"Button",BS_AUTORADIOBUTTON | 
-                    BS_FLAT | WS_TABSTOP,12,51,33,10
-    CONTROL         "&1800%",IDC_ZOOM_800,"Button",BS_AUTORADIOBUTTON | 
-                    BS_FLAT | WS_TABSTOP,12,62,33,10
-    DEFPUSHBUTTON   "OK",IDOK,8,77,15,14,BS_FLAT | WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,26,77,27,14,BS_FLAT
-    LTEXT           "Tweak by",IDC_STATIC,1,94,62,8,SS_CENTERIMAGE
-    LTEXT           "svgmaker",IDC_STATIC,2,103,54,8
+    LTEXT           "Current zoom:",IDC_CURRENT_ZOOM_STATIC,13,7,47,7
+    RTEXT           "",IDC_CURRENT_ZOOM,61,7,49,9
+    DEFPUSHBUTTON   "OK",IDOK,142,7,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,142,24,50,14
+    LTEXT           "Tweak by svgmaker",IDC_STATIC,141,57,52,20,SS_SUNKEN
+    LTEXT           "Zoom to:",IDC_STATIC,13,16,58,10
+    EDITTEXT        IDC_CUSTOM_ZOOM,12,25,36,12,ES_AUTOHSCROLL
+    LTEXT           "%",IDC_STATIC,51,27,30,14
 END
 
 IDD_TEXT_FONT_DLG DIALOG DISCARDABLE  0, 0, 235, 13
@@ -686,50 +679,6 @@ BEGIN
     PUSHBUTTON      "&Help",1038,118,192,48,14
 END
 
-IDD_ABOUT_SVGMAKER DIALOG DISCARDABLE  0, 0, 186, 90
-STYLE DS_MODALFRAME | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
-FONT 8, "MS Sans Serif"
-BEGIN
-    CTEXT           "i made this thing i guess\ngithub.com/svgmaker\n\nFeatures:\n-Bigger zooming\n-Different paintbrush icon\n-Unhidden (broken) transparency",
-                    IDC_STATIC,7,9,172,60,SS_SUNKEN
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
-BEGIN
-    IDD_IMAGE_ATTRIBUTES, DIALOG
-    BEGIN
-        RIGHTMARGIN, 234
-    END
-
-    IDD_VIEW_ZOOM, DIALOG
-    BEGIN
-        BOTTOMMARGIN, 83
-    END
-
-    IDD_ABOUT_SVGMAKER, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 179
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 83
-    END
-END
-#endif    // APSTUDIO_INVOKED
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// WMF
-//
-
-IDR_WMF1                WMF     DISCARDABLE     "RES\\ICONS\\TRI.wmf"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -775,7 +724,7 @@ END
 
 STRINGTABLE PRELOAD DISCARDABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "Paint - Modded by github.com/svgmaker"
+    AFX_IDS_APP_TITLE       "Paint"
     AFX_IDS_IDLEMESSAGE     "For Help, click Help Topics on the Help Menu."
     AFX_IDS_HELPMODEMESSAGE "Select an area on which to get Help."
 END
@@ -795,7 +744,7 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    ID_APP_ABOUT            "Displays program information, version number, and awesomeness!"
+    ID_APP_ABOUT            "Displays program information, version number, and copyright."
     ID_APP_EXIT             "Quits Paint."
     ID_HELP_INDEX           "Opens Paint Help."
     ID_HELP_USING           "Displays instructions about how to use Help."
@@ -812,7 +761,7 @@ BEGIN
     ID_FILE_SCAN_NEW        "Downloads a new document from a scanner or camera."
     ID_VIEW_ZOOM_100        "Zooms the picture to 100%."
     ID_VIEW_ZOOM_400        "Zooms the picture to 400%."
-    ID_VIEW_ZOOM            "Big zoom (Tweak by svgmaker)"
+    ID_VIEW_ZOOM            "Zooms the picture past 1000 percent."
     ID_VIEW_VIEW_PICTURE    "Displays the entire picture."
     ID_VIEW_THUMBNAIL       "Shows or hides the thumbnail view of the picture."
     ID_VIEW_GRID            "Shows or hides the grid."

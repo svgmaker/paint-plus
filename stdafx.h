@@ -19,4 +19,4 @@
 
 #include "bar.h"
 #include "wiadevdp.h"
-#include "gdiplus.h"
+#include <gdiplus.h>

@@ -100,7 +100,7 @@ LINK32=link.exe
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /YX /FD /c
 # ADD CPP /nologo /MD /W3 /GX /O2 /D "NDEBUG" /D "_AFXDLL" /D "_MBCS" /D "WIN32" /D "_WINDOWS" /D "WINNT" /D "NT" /D "USE_MIRRORING" /D "USE_TWAIN" /D _MFC_VER=0x0600 /D _WIN32_WINNT=0x0501 /Yu"stdafx.h" /FD /c
-# SUBTRACT CPP /Fr
+# SUBTRACT CPP /Z<none> /Fr
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -591,10 +591,6 @@ SOURCE=.\res\icons\bitimage.ico
 # End Source File
 # Begin Source File
 
-SOURCE=.\res\bitmaps\bitmap1.bmp
-# End Source File
-# Begin Source File
-
 SOURCE=.\res\cursors\brush.cur
 # End Source File
 # Begin Source File
@@ -770,9 +766,5 @@ SOURCE=.\res\cursors\zoom.cur
 SOURCE=.\res\bitmaps\zoomopt.bmp
 # End Source File
 # End Group
-# Begin Source File
-
-SOURCE=.\res\icons\TRI.wmf
-# End Source File
 # End Target
 # End Project
