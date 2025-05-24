@@ -23,7 +23,7 @@
 #define BACKSPACE_BMP_POS     8
 #define NEWLINE_BMP_POS       9
 
-#define SHADOW_BMP_POS        -1  // don't exist currently
+#define SHADOW_BMP_POS        12  // Position in bitmap strip for shadow button
 
 #define BOLD_TBAR_POS         0
 #define ITALIC_TBAR_POS       1
@@ -42,7 +42,7 @@
 #define SPACE_THREE          10
 #define PEN_TBAR_PEN_POS     11
 
-#define SHADOW_TBAR_POS       -1  // don't exist currently
+#define SHADOW_TBAR_POS       4   // Position in toolbar for shadow button when not in pen mode
 #define KEYBOARD_TBAR_POS     -1  // don't exist currently
 
 #define FONT_BMP_TXT_BORDER   2   // # pixels between font bmp (prn/tt) and text
@@ -206,6 +206,7 @@ class CTfont : public CMiniFrmWnd
     afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
     afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
     afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnShadowUpdate(CCmdUI* pCmdUI);
         //}}AFX_MSG
     DECLARE_MESSAGE_MAP()
 

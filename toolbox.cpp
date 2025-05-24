@@ -68,7 +68,9 @@ static UINT NEAR rgidm [] =
     IDMB_POLYGONTOOL,
 
     IDMB_ELLIPSETOOL,
-    IDMB_RNDRECTTOOL
+    IDMB_RNDRECTTOOL,
+    
+    IDMB_TRIANGLETOOL
     };
 
 /******************************************************************************/

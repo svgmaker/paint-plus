@@ -198,15 +198,33 @@ void CPBFrame::OnHelp()
 
 /***************************************************************************/
 
-int CPBFrame::OnCreate( LPCREATESTRUCT lpCreateStruct )
-    {
-    if (CFrameWnd::OnCreate( lpCreateStruct ) == -1)
+int CPBFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+    if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
         return -1;
+
+    // Create the toolbar
+    if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
+        | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+        !m_wndToolBar.LoadToolBar(IDB_MAINTOOLS))
+    {
+        TRACE("Failed to create toolbar\n");
+        return -1;
+    }
+
+    // Enable docking if you want
+    m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
+    EnableDocking(CBRS_ALIGN_ANY);
+    DockControlBar(&m_wndToolBar);
+
+    // Set global pointers as in your second OnCreate
     g_pStatBarWnd = &m_statBar;
     g_pImgToolWnd = &m_toolBar;
     g_pImgColorsWnd = &m_colorBar;
+
     return 0;
-    }
+}
+
 
 /***************************************************************************/
 

@@ -6,7 +6,13 @@
 --------------------Configuration: mspaint - Win32 ANSI Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP2B.tmp" with contents
+Creating temporary file "C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP38.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /Gi /GX /ZI /Od /D "_DEBUG" /D "_MBCS" /D "DBG" /D "WIN32" /D "_WINDOWS" /D "WINNT" /D "NT" /D "USE_MIRRORING" /D "USE_TWAIN" /D _MFC_VER=0x0600 /D _WIN32_WINNT=0x0501 /FR"DebugA/" /Fp"DebugA/mspaint.pch" /Yu"stdafx.h" /Fo"DebugA/" /Fd"DebugA/" /FD /c 
+"C:\Documents and Settings\Ack\Desktop\Real test zone\pbrusvw.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP38.tmp" 
+Creating temporary file "C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP39.tmp" with contents
 [
 image.lib htmlhelp.lib imm32.lib version.lib wiaguid.lib gdiplus.lib uxtheme.lib delayimp.lib /nologo /subsystem:windows /incremental:yes /pdb:"DebugA/mspaint.pdb" /debug /machine:I386 /out:"DebugA/mspaint.exe" /pdbtype:sept /delayload:gdiplus.dll /delayload:uxtheme.dll 
 ".\DebugA\bar.obj"
@@ -49,6 +55,7 @@ image.lib htmlhelp.lib imm32.lib version.lib wiaguid.lib gdiplus.lib uxtheme.lib
 ".\DebugA\t_fhsel.obj"
 ".\DebugA\t_poly.obj"
 ".\DebugA\t_text.obj"
+".\DebugA\t_tri.obj"
 ".\DebugA\tedit.obj"
 ".\DebugA\tfont.obj"
 ".\DebugA\thumnail.obj"
@@ -57,8 +64,10 @@ image.lib htmlhelp.lib imm32.lib version.lib wiaguid.lib gdiplus.lib uxtheme.lib
 ".\DebugA\undo.obj"
 ".\DebugA\mspaint.res"
 ]
-Creating command line "link.exe @C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP2B.tmp"
+Creating command line "link.exe @C:\DOCUME~1\Ack\LOCALS~1\Temp\RSP39.tmp"
 <h3>Output Window</h3>
+Compiling...
+pbrusvw.cpp
 Linking...
 
 

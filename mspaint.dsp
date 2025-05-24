@@ -319,6 +319,10 @@ SOURCE=.\t_text.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\t_tri.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\tedit.cpp
 # End Source File
 # Begin Source File
@@ -756,6 +760,10 @@ SOURCE=.\res\icons\stchvert.ico
 # Begin Source File
 
 SOURCE=.\res\bitmaps\text_tbv.bmp
+ End Source File
+# Begin Source File
+
+SOURCE=.\res\bitmaps\toolbar1.bmp
 # End Source File
 # Begin Source File
 

@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include "global.h"
 #include "pbrush.h"
@@ -71,6 +70,7 @@ CAirBrushTool         g_airBrushTool;
 CFloodTool            g_floodTool;
 CPickColorTool        g_pickColorTool;
 CZoomTool             g_zoomTool;
+CTriangleTool          g_triangleTool;
 
 /***************************************************************************/
 
@@ -2128,13 +2128,6 @@ void CLineTool::Render(CDC* pDC, CRect& rect, BOOL bLeft, BOOL bCommit, BOOL bCt
 //         0 <=   y/x   <     .414   Constrained to  0 Degrees
 //      .414 <=   y/x   <    2.414   Constrained to 45 Degrees
 //     2.414 <=   y/x                Constrained to 90 Degrees
-//
-// For more precision, we will multiply everything by 1000 to give us finally
-// the following table
-//
-//         0 <=   (1000*y)/x  <     414   Constrained to  0 Degrees
-//       414 <=   (1000*y)/x  <    2414   Constrained to 45 Degrees
-//      2414 <=   (1000*y)/x              Constrained to 90 Degrees
 
 void CLineTool::AdjustPointsForConstraint(MTI *pmti)
     {

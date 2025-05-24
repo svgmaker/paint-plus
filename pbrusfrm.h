@@ -12,7 +12,7 @@ class CImagingMgr;
 class CPBFrame : public CFrameWnd
     {
     protected: /****** create from serialization only *************************/
-
+	CToolBar m_wndToolBar;
     CPBFrame();
 
     DECLARE_DYNCREATE( CPBFrame )

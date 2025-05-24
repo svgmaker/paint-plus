@@ -255,6 +255,8 @@ BEGIN_MESSAGE_MAP( CTfont, CMiniFrmWnd )
 
     ON_COMMAND(IDC_VERTEDIT, OnVertEdit)
     ON_UPDATE_COMMAND_UI(IDC_VERTEDIT, OnVertEditUpdate)
+	ON_COMMAND(IDC_SHADOW, OnShadow)
+	ON_UPDATE_COMMAND_UI(IDC_SHADOW, OnShadowUpdate)
 
     ON_COMMAND(IDC_SHADOW, OnShadow)
     ON_COMMAND(IDC_PENEXT, OnPen)
@@ -641,14 +643,14 @@ void CTfont::RefreshToolBar(void)
 //  currently this is not present on the toolbar.  When it is available, fix the
 //  SHADOW_TBAR_POS and SHADOW_BMP_POS #define in tfont.h
 
-//   if (m_bShadowOn)
-//       {
-//       m_pcTfontTbar->SetButtonInfo(SHADOW_TBAR_POS, IDC_SHADOW, TBBS_CHECKBOX | TBBS_CHECKED, SHADOW_BMP_POS);
-//       }
-//   else
-//       {
-//       m_pcTfontTbar->SetButtonInfo(SHADOW_TBAR_POS, IDC_SHADOW, TBBS_CHECKBOX, SHADOW_BMP_POS);
-//       }
+		if (m_bShadowOn)
+       {
+       m_pcTfontTbar->SetButtonInfo(SHADOW_TBAR_POS, IDC_SHADOW, TBBS_CHECKBOX | TBBS_CHECKED, SHADOW_BMP_POS);
+       }
+   else
+       {
+       m_pcTfontTbar->SetButtonInfo(SHADOW_TBAR_POS, IDC_SHADOW, TBBS_CHECKBOX, SHADOW_BMP_POS);
+       }
     }
 
 /******************************************************************************/
@@ -1365,7 +1367,7 @@ void CTfont::OnTypeFaceComboBoxUpdate(void)
                                                  TBBS_CHECKBOX, VERTEDIT_BMP_POS);
                     }
                 }
-            else
+                else
                 {
                 if ( m_bVertEditOn == TRUE )
                     {
@@ -1575,6 +1577,8 @@ void CTfont::OnDestroy()
 
         CMiniFrmWnd::OnDestroy();
 }
+/******************************************************************************/
+// Text shadow implementation
 
 /******************************************************************************/
 
@@ -1652,6 +1656,11 @@ void CTfont::OnShadow(void)
 
     m_iControlIDLastChange = IDC_SHADOW;
     }
+
+void CTfont::OnShadowUpdate(CCmdUI* pCmdUI)
+{
+    pCmdUI->SetCheck(m_bShadowOn ? 1 : 0);
+}
 
 /******************************************************************************/
 
@@ -1870,22 +1879,18 @@ BOOL CTfontTbar::Create(CWnd* pcParentWnd, BOOL bShowPen)
         ButtonIDS[0]   = IDC_BOLD;
         ButtonIDS[1]   = IDC_ITALIC;
         ButtonIDS[2]   = IDC_UNDERLINE;
-
-
         ButtonIDS[3]   = IDC_VERTEDIT;
-
         ButtonIDS[4]   = ID_SEPARATOR;
         ButtonIDS[5]   = IDC_INS_SPACE;
         ButtonIDS[6]   = IDC_BACKSPACE;
         ButtonIDS[7]   = IDC_NEWLINE;
-
         ButtonIDS[8]   = ID_SEPARATOR;
         ButtonIDS[9]   = IDC_EDITTEXT;
-
         ButtonIDS[10]  = ID_SEPARATOR;
         ButtonIDS[11]  = IDC_PENEXT;
+        ButtonIDS[12]  = IDC_SHADOW;  // Add shadow button
 
-        iNumButtons    = 12;
+        iNumButtons    = 13;
         iNumSeparators = 3;
         }
     else
@@ -1893,23 +1898,19 @@ BOOL CTfontTbar::Create(CWnd* pcParentWnd, BOOL bShowPen)
         ButtonIDS[0] = IDC_BOLD;
         ButtonIDS[1] = IDC_ITALIC;
         ButtonIDS[2] = IDC_UNDERLINE;
-
         ButtonIDS[3] = IDC_VERTEDIT;
-
+        ButtonIDS[4] = IDC_SHADOW;  // Add shadow button
 
         if (theApp.m_bPenSystem)
             {
-
-            ButtonIDS[4] = ID_SEPARATOR;
-
-            ButtonIDS[5] = IDC_PENEXT;
-            iNumButtons    = 6;
+            ButtonIDS[5] = ID_SEPARATOR;
+            ButtonIDS[6] = IDC_PENEXT;
+            iNumButtons    = 7;
             iNumSeparators = 1;
             }
         else
             {
-
-            iNumButtons    = 4;
+            iNumButtons    = 5;  // Updated to include shadow button
             iNumSeparators = 0;
             }
         }
@@ -1938,10 +1939,8 @@ BOOL CTfontTbar::Create(CWnd* pcParentWnd, BOOL bShowPen)
         SetButtonInfo(BOLD_TBAR_POS,      IDC_BOLD,       TBBS_CHECKBOX, BOLD_BMP_POS);
         SetButtonInfo(ITALIC_TBAR_POS,    IDC_ITALIC,     TBBS_CHECKBOX, ITALIC_BMP_POS);
         SetButtonInfo(UNDERLINE_TBAR_POS, IDC_UNDERLINE,  TBBS_CHECKBOX, UNDERLINE_BMP_POS);
-
         SetButtonInfo(VERTEDIT_TBAR_POS,  IDC_VERTEDIT,   TBBS_CHECKBOX, VERTEDIT_BMP_POS);
-
-
+        SetButtonInfo(SHADOW_TBAR_POS,    IDC_SHADOW,     TBBS_CHECKBOX, SHADOW_BMP_POS);  // Add shadow button info
 
         SetButtonInfo(INS_SPACE_TBAR_POS, IDC_INS_SPACE,  TBBS_BUTTON, INS_SPACE_BMP_POS);
         SetButtonInfo(BACKSPACE_TBAR_POS, IDC_BACKSPACE,  TBBS_BUTTON, BACKSPACE_BMP_POS);
@@ -1950,9 +1949,6 @@ BOOL CTfontTbar::Create(CWnd* pcParentWnd, BOOL bShowPen)
         SetButtonInfo(EDITTEXT_TBAR_POS,  IDC_EDITTEXT,   TBBS_BUTTON, EDITTEXT_BMP_POS);
 
         SetButtonInfo(PEN_TBAR_PEN_POS,   IDC_PENEXT,     TBBS_CHECKBOX, PEN_BMP_POS);
-
-// presently unused
-//        SetButtonInfo(KEYBOARD_TBAR_POS,  IDC_KEYBOARD,   TBBS_BUTTON, KEYBOARD_BMP_POS);
         }
     else
         {
@@ -1960,9 +1956,8 @@ BOOL CTfontTbar::Create(CWnd* pcParentWnd, BOOL bShowPen)
         SetButtonInfo(BOLD_TBAR_POS,      IDC_BOLD,       TBBS_CHECKBOX, BOLD_BMP_POS);
         SetButtonInfo(ITALIC_TBAR_POS,    IDC_ITALIC,     TBBS_CHECKBOX, ITALIC_BMP_POS);
         SetButtonInfo(UNDERLINE_TBAR_POS, IDC_UNDERLINE,  TBBS_CHECKBOX, UNDERLINE_BMP_POS);
-
         SetButtonInfo(VERTEDIT_TBAR_POS,  IDC_VERTEDIT,   TBBS_CHECKBOX, VERTEDIT_BMP_POS);
-
+        SetButtonInfo(SHADOW_TBAR_POS,    IDC_SHADOW,     TBBS_CHECKBOX, SHADOW_BMP_POS);  // Add shadow button info
 
         if (theApp.m_bPenSystem)
             SetButtonInfo(PEN_TBAR_TEXT_POS, IDC_PENEXT,  TBBS_CHECKBOX, PEN_BMP_POS);

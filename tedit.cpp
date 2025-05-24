@@ -1538,28 +1538,45 @@ void CTedit::HideFontToolbar(void)
 /******************************************************************************/
 // Returns a Ptr to a discardable bitmap (CBitmap object) or NULL on error
 
-void CTedit::GetBitmap( CDC* pDC, CRect* prectImg )
+void CTedit::GetBitmap(CDC* pDC, CRect* prectImg)
+{
+    if (!m_bBackgroundTransparent)
+        pDC->FillRect(prectImg, &m_hbrBkColor);
+
+    if (m_pcTfont && m_pcTfont->IsShadowOn())
     {
-    if (! m_bBackgroundTransparent)
-        pDC->FillRect( prectImg, &m_hbrBkColor );
+        // --- MANUAL DRAWING (shadow + text) ---
+        CString strText;
+        m_cEdit.GetWindowText(strText);
 
-    m_cEdit.SetSel( -1, 0 );
+        CFont* pFont = m_cEdit.GetFont();
+        CFont* pOldFont = pDC->SelectObject(pFont);
 
+        // Draw shadow text
+        pDC->SetTextColor(RGB(128, 128, 128));
+        pDC->SetBkMode(TRANSPARENT);
+        CRect rcShadow(prectImg->left + 1, prectImg->top + 1, prectImg->right + 1, prectImg->bottom + 1);
+        pDC->DrawText(strText, &rcShadow, DT_SINGLELINE | DT_NOPREFIX);
 
-    if ( m_bVertEdit )
-        {
-        m_cEdit.SetFmtRect();
-        m_cEdit.UpdateWindow();
-        }
+        // Draw main text
+        pDC->SetTextColor(RGB(0, 0, 0));
+        CRect rcMain = *prectImg;
+        pDC->DrawText(strText, &rcMain, DT_SINGLELINE | DT_NOPREFIX);
 
-
-    CPoint ptViewOrgOld = pDC->SetViewportOrg( prectImg->left, prectImg->top );
-
-    m_cEdit.SendMessage( WM_PAINT, (WPARAM)(pDC->m_hDC) );
-
-    pDC->SetViewportOrg( ptViewOrgOld );
-    pDC->SelectClipRgn( NULL );
+        pDC->SelectObject(pOldFont);
     }
+    else
+    {
+        // --- NORMAL CONTROL RENDERING ---
+        // Let the control render itself so text alignment, spacing, etc. are preserved
+        CPoint ptViewOrgOld = pDC->SetViewportOrg(prectImg->left, prectImg->top);
+        m_cEdit.SendMessage(WM_PAINT, (WPARAM)(pDC->m_hDC));
+        pDC->SetViewportOrg(ptViewOrgOld);
+    }
+
+    pDC->SelectClipRgn(NULL);
+}
+
 
 /******************************************************************************/
 
@@ -2064,22 +2081,30 @@ HBRUSH CTedit::OnCtlColor (CDC* pDC, CWnd* pWnd, UINT nCtlColor )
         {
         PBSelectPalette( pDC, theApp.m_pPalette, FALSE );
         pDC->SetTextColor( m_crFGColor );
-
-        //set the background color and transparent mode
-//      if (m_bBackgroundTransparent)
-//          {
+        
+        // For shadow effect, we need transparent background
+        if (m_pcTfont && m_pcTfont->IsShadowOn())
+        {
             pDC->SetBkMode( TRANSPARENT );
-
             hbrBack = (HBRUSH)::GetStockObject( NULL_BRUSH );
-//          }
-//      else
-//          {
-//          pDC->SetBkMode( OPAQUE );
-//          pDC->SetBkColor( m_crBKColor );
-
-//          hbrBack = (HBRUSH)m_hbrBkColor.GetSafeHandle();
-//          }
         }
+        else
+        {
+            pDC->SetBkColor( m_crBKColor );
+            
+            if (m_bBackgroundTransparent)
+            {
+                pDC->SetBkMode( TRANSPARENT );
+                hbrBack = (HBRUSH)::GetStockObject( NULL_BRUSH );
+            }
+            else
+            {
+                pDC->SetBkMode( OPAQUE );
+                hbrBack = (HBRUSH)m_hbrBkColor.GetSafeHandle();
+            }
+        }
+        }
+        
     if (hbrBack == NULL)
         return (HBRUSH)Default();
 

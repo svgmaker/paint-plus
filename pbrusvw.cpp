@@ -708,86 +708,83 @@ int CPBView::SetTools()
             pParentWindow = (CFrameWnd*)CFrameWnd::FromHandle( theApp.m_hwndInPlaceApp );
         }
 
+    ASSERT(g_pStatBarWnd);
+    ASSERT(g_pImgToolWnd);
+    ASSERT(g_pImgColorsWnd);
 
-        ASSERT(g_pStatBarWnd);
-        ASSERT(g_pImgToolWnd);
-        ASSERT(g_pImgColorsWnd);
+    pParentWindow->EnableDocking(CBRS_ALIGN_ANY);
 
-        // Create the status bar
-        if ( !g_pStatBarWnd->m_hWnd )
-                {
-                if ( g_pStatBarWnd->Create(pParentWindow) )
-                        {
-                        if (theApp.m_fntStatus.m_hObject != NULL)
-                                g_pStatBarWnd->SetFont( &theApp.m_fntStatus, FALSE );
-                        g_pStatBarWnd->SetOwner(pOwnerWindow);
-                        ShowStatusBar(TRUE);
+    // Create the status bar first to ensure proper z-order
+    if ( !g_pStatBarWnd->m_hWnd )
+    {
+        if ( g_pStatBarWnd->Create(pParentWindow) )
+        {
+            if (theApp.m_fntStatus.m_hObject != NULL)
+                g_pStatBarWnd->SetFont( &theApp.m_fntStatus, FALSE );
+            g_pStatBarWnd->SetOwner(pOwnerWindow);
+            ShowStatusBar(TRUE);
+            bRestoreState = TRUE;
+        }
+        else
+        {
+            TRACE0("Failed to create status bar\n");
+            return -1;
+        }
+    }
 
-                        bRestoreState = TRUE;
-                        }
-                else
-                        {
-                        TRACE0("Failed to create status bar\n");
-                        return -1;
-                        }
-                }
-
-        pParentWindow->EnableDocking(CBRS_ALIGN_ANY);
-
-        // Create and dock the tool bar
-        if ( !g_pImgToolWnd->m_hWnd || !IsWindow(g_pImgToolWnd->m_hWnd) )
-                {
+    // Create and dock the tool bar next
+    if ( !g_pImgToolWnd->m_hWnd || !IsWindow(g_pImgToolWnd->m_hWnd) )
+    {
         CString strToolWnd;
         strToolWnd.LoadString(IDS_PAINT_TOOL);
-                if ( g_pImgToolWnd->Create( strToolWnd,
-                                            WS_CHILD|WS_VISIBLE|CBRS_LEFT,
-                                            CRect(0, 0, 0, 0),
-                                            CPoint(25, 25),
-                                            2,
-                                            pParentWindow ) )
-                        {
-                        g_pImgToolWnd->SetOwner(pOwnerWindow);
-                        g_pImgToolWnd->EnableDocking(CBRS_ALIGN_LEFT|CBRS_ALIGN_RIGHT);
-                        pParentWindow->DockControlBar(g_pImgToolWnd,
-                                                      AFX_IDW_DOCKBAR_LEFT);
+        if ( g_pImgToolWnd->Create( strToolWnd,
+                                    WS_CHILD|WS_VISIBLE|CBRS_LEFT,
+                                    CRect(0, 0, 0, 0),
+                                    CPoint(25, 25),
+                                    2,
+                                    pParentWindow ) )
+        {
+            g_pImgToolWnd->SetOwner(pOwnerWindow);
+            g_pImgToolWnd->EnableDocking(CBRS_ALIGN_LEFT|CBRS_ALIGN_RIGHT);
+            pParentWindow->DockControlBar(g_pImgToolWnd, AFX_IDW_DOCKBAR_LEFT);
+            bRestoreState = TRUE;
+        }
+        else
+        {
+            TRACE0("Failed to create toolbar\n");
+            return -1;
+        }
+    }
 
-                        bRestoreState = TRUE;
-                        }
-                else
-                {
-                        TRACE0("Failed to create toolbar\n");
-                        return -1;
-                        }
-                }
-
-        // Create and dock the color bar
-        if ( !g_pImgColorsWnd->m_hWnd || !IsWindow(g_pImgColorsWnd->m_hWnd) )
-                {
+    // Create and dock the color bar last
+    if ( !g_pImgColorsWnd->m_hWnd || !IsWindow(g_pImgColorsWnd->m_hWnd) )
+    {
         CString strColorsWnd;
         strColorsWnd.LoadString(IDS_COLORS);
-                if ( g_pImgColorsWnd->Create(strColorsWnd,
-                                            WS_CHILD|WS_VISIBLE|CBRS_BOTTOM,
-                                            pParentWindow) )
-                        {
-                        g_pImgColorsWnd->SetOwner(pOwnerWindow);
-                        g_pImgColorsWnd->EnableDocking(CBRS_ALIGN_BOTTOM|CBRS_ALIGN_TOP);
-                        pParentWindow->DockControlBar(g_pImgColorsWnd,
-                                                     AFX_IDW_DOCKBAR_BOTTOM);
-
-                        bRestoreState = TRUE;
-                        }
-                else
-                        {
-                        TRACE0("Failed to create colorbar\n");
-                        return -1;
-                        }
-                }
+        if ( g_pImgColorsWnd->Create(strColorsWnd,
+                                    WS_CHILD|WS_VISIBLE|CBRS_BOTTOM,
+                                    pParentWindow) )
+        {
+            g_pImgColorsWnd->SetOwner(pOwnerWindow);
+            g_pImgColorsWnd->EnableDocking(CBRS_ALIGN_BOTTOM);  // Only allow bottom docking
+            pParentWindow->DockControlBar(g_pImgColorsWnd, AFX_IDW_DOCKBAR_BOTTOM);
+            bRestoreState = TRUE;
+        }
+        else
+        {
+            TRACE0("Failed to create colorbar\n");
+            return -1;
+        }
+    }
 
     if ( bRestoreState && !theApp.m_bLinked && !theApp.m_bEmbedded && !theApp.m_pwndInPlaceFrame )
+    {
+        pOwnerWindow->RecalcLayout();  // Force a recalc before loading state
         pOwnerWindow->LoadBarState(TEXT("General")); // Dangerous in-place!
+    }
 
     pOwnerWindow->DelayRecalcLayout( TRUE );
-        return 0;
+    return 0;
     }
 
 /******************************************************************************/

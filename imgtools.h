@@ -1,6 +1,11 @@
 #ifndef __IMGTOOLS_H__
 #define __IMGTOOLS_H__
 
+// Forward declarations
+#include "imgwnd.h"
+class CImgToolWnd;
+class CImageWell;
+
 extern BOOL  g_bBrushVisible;
 extern BOOL  g_bPickingColor;
 extern UINT  g_nStrokeWidth;
@@ -430,6 +435,17 @@ class CZoomTool : public CImgTool
     virtual void OnClickOptions(CImgToolWnd* pWnd, const CRect& optionsRect,
                                                    const CPoint& clickPoint);
     };
+
+class CTriangleTool : public CClosedFormTool
+{
+    DECLARE_DYNAMIC(CTriangleTool)
+
+public:
+    CTriangleTool();
+    virtual void Render(CDC* pDC, CRect& rect, BOOL bDraw, BOOL bCommit, BOOL bCtrlDown);
+};
+
+extern CTriangleTool g_triangleTool;
 
 #endif // __IMGTOOLS_H__
 

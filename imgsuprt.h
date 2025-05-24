@@ -1,6 +1,9 @@
 #ifndef __IMGSUPRT_H__
 #define __IMGSUPRT_H__
 
+#include "stdafx.h"
+#include "imgwnd.h"
+
 #define MAX_PALETTE_COLORS 256
 
 #define WM_CANCEL WM_USER + 0

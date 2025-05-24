@@ -104,6 +104,7 @@ FONT_PRN_BMP            BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_PRN.BMP"
 TT_OPENTYPE_BMP         BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_TTOTF.BMP"
 PS_OPENTYPE_BMP         BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_PSOTF.BMP"
 TYPE1_BMP               BITMAP  MOVEABLE PURE   "RES\\BITMAPS\\FONT_TYPE1.BMP"
+IDR_TOOLBAR1            BITMAP  DISCARDABLE     "res\\bitmaps\\toolbar1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -682,6 +683,32 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Toolbar
+//
+
+IDR_TOOLBAR1 TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON59503
+END
+
+IDB_MAINTOOLS TOOLBAR DISCARDABLE  16, 16
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_EDIT_UNDO
+    BUTTON      ID_EDIT_REDO
+    SEPARATOR
+    BUTTON      ID_IMAGE_ATTRIBUTES
+    BUTTON      ID_VIEW_GRID
+    BUTTON      ID_VIEW_THUMBNAIL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -709,7 +736,7 @@ END
 
 STRINGTABLE PRELOAD DISCARDABLE 
 BEGIN
-    ID_MAINFRAME            "Paint\nuntitled\nBitmap Image\nBitmap Files (*.bmp)\n.bmp\nPaint.Picture\nBitmap Image"
+    ID_MAINFRAME            "Paint Plus (github/svgmaker/paint-plus)\nuntitled\nBitmap Image\nBitmap Files (*.bmp)\n.bmp\nPaint.Picture\nBitmap Image"
     IDS_EXTENSION_BMP       ".bmp"
     IDS_EXTENSION_GIF       ".gif"
     IDS_EXTENSION_JPEG      ".jpg"
@@ -724,7 +751,7 @@ END
 
 STRINGTABLE PRELOAD DISCARDABLE 
 BEGIN
-    AFX_IDS_APP_TITLE       "Paint"
+    AFX_IDS_APP_TITLE       "Paint Plus"
     AFX_IDS_IDLEMESSAGE     "For Help, click Help Topics on the Help Menu."
     AFX_IDS_HELPMODEMESSAGE "Select an area on which to get Help."
 END
@@ -745,8 +772,8 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     ID_APP_ABOUT            "Displays program information, version number, and copyright."
-    ID_APP_EXIT             "Quits Paint."
-    ID_HELP_INDEX           "Opens Paint Help."
+    ID_APP_EXIT             "Quits Paint Plus."
+    ID_HELP_INDEX           "Opens Paint Plus Help. (Work in progress - svgmaker)"
     ID_HELP_USING           "Displays instructions about how to use Help."
     ID_CONTEXT_HELP         "Displays Help for areas you click on."
     ID_HELP                 "Displays Help for the current task or command."
@@ -852,7 +879,7 @@ BEGIN
     IDS_ERROR_NOMEMORY      "There is not enough memory or resources to complete operation.\nClose some programs, and then try again."
     IDS_ERROR_LOWMEMORY     "Low on memory or resources.\nClose some programs, and then try again."
     IDS_ERROR_GROUP         "Group error."
-    IDS_ERROR_PRINTING      "Paint was unable to print your document. Please make sure you have sufficient disk space and that your printer is working correctly."
+    IDS_ERROR_PRINTING      "Paint Plus was unable to print your document. Please make sure you have sufficient disk space and that your printer is working correctly."
 END
 
 STRINGTABLE DISCARDABLE 
@@ -862,8 +889,8 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_ERROR_OPEN          "Paint cannot open this file."
-    IDS_ERROR_READLOAD      "Paint cannot read this file."
+    IDS_ERROR_OPEN          "Paint Plus cannot open this file."
+    IDS_ERROR_READLOAD      "Paint Plus cannot read this file."
     IDS_ERROR_SAVERO        "This file is read-only.\nTo save your changes, use a different filename."
     IDS_ERROR_COMPEX        "This file is already open."
 END
@@ -886,7 +913,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_ERROR_EXE_INUSE     "This file is already in use.\nClose the program, and then try again."
-    IDS_ERROR_SAVE          "Paint cannot save this file."
+    IDS_ERROR_SAVE          "Paint Plus cannot save this file."
 END
 
 STRINGTABLE DISCARDABLE 
@@ -897,7 +924,7 @@ END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
-    IDS_ERROR_SAMENAME      "Paint cannot save to the same filename with a different file type.\nUse a different filename to save your changes."
+    IDS_ERROR_SAMENAME      "Paint Plus cannot save to the same filename with a different file type.\nUse a different filename to save your changes."
 END
 
 STRINGTABLE DISCARDABLE 
@@ -996,7 +1023,7 @@ BEGIN
     IDS_VIEWMENUHELP        "Contains commands for customizing this window."
     IDS_IMAGEMENUHELP       "Contains commands for manipulating pictures and setting attributes."
     IDS_OPTIONSMENUHELP     "Contains commands for using custom colors and drawing options."
-    IDS_HELPMENUHELP        "Contains commands for displaying Help for and information about Paint."
+    IDS_HELPMENUHELP        "Contains commands for displaying Help for and information about Paint Plus. (Work In Progress - svgmaker)"
 END
 
 STRINGTABLE DISCARDABLE 
@@ -1046,7 +1073,7 @@ BEGIN
     ID_SELECTION_SENDTO     "Sends the selection using mail or fax."
     ID_SELECTION_PRINTTO    "Prints the selection."
     ID_THUMBNAIL_THUMBNAIL  "Shows or hides the thumbnail."
-    ID_THUMBNAIL_HELP       "Shows Paint Help."
+    ID_THUMBNAIL_HELP       "Shows Paint Plus Help. (work in progress - svgmaker)"
     IDS_REGISTRY_PATH       "Microsoft\\Windows\\CurrentVersion\\Applets"
 END
 
@@ -1075,7 +1102,7 @@ STRINGTABLE DISCARDABLE
 BEGIN
     ID_TEXT_UNDERLINE       "Sets or clears the text underline attribute."
     ID_TOOLBAR_SHOWTOOLTIPS "Shows or hides the tooltips."
-    ID_TOOLBAR_HELP         "Show Paint Help."
+    ID_TOOLBAR_HELP         "Show Paint Plus Help. (Work In Progress - svgmaker)"
 END
 
 STRINGTABLE DISCARDABLE 
