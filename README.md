@@ -12,10 +12,15 @@ If you or a friend knows C++ please contribute by working on the roadmap below.
 Working things:
 
 - Zoom past 1000x with a custom zoom by going to View > Zoom > 1000x zoom. There isn't a limit! (i think) 
+- Triangle tool (bugged but sort of works)
+- Toolbar for quick access to menu commands
+- Font shadow
+- New icons (I will make modern ones soon)
 
 A possible roadmap:
 
-- Triangle tool
+- GIF transparency (will require office 97 for some reason)
+- Toolbox shortcuts - [m] for square selection, [z] for zoom etc
 - Icon stamp tool
 - Visual Styles buttons to get system-looking buttons.
 
